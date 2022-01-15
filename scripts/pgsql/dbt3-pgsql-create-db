@@ -58,10 +58,11 @@ echo "Creating database..."
 if [ -d ${PGDATA} ]; then
 	echo "PGData directory '${PGDATA}' already exists, skipping initdb..."
 else
-	# initialize database cluster
-	echo "initializing database cluster..."
-        mkdir -p ${PGDATA}
-	${INITDB} -D ${PGDATA} --locale=C || exit 1
+	# initialize
+	echo "initializing ..."
+    #    mkdir -p ${PGDATA}
+	# Database will not be initalized because already it is.
+	# ${INITDB} -D ${PGDATA} --locale=C || exit 1
 
 	# Use alternative XLOG directory.
 	if [ ! "x${XLOGPATH}" = "x" ]; then
@@ -71,11 +72,12 @@ else
 	    ln -s ${XLOGPATH}/pg_xlog ${PGDATA}/pg_xlog || exit 1;
 	fi
 	
-	# Starting the database after initdb
-	dbt3-pgsql-start-db ${PARAMOPT} || exit 1
+	# Starting the database after initdb, disable the call to this script,
+	# remote databases should not be started from the test.
+	# dbt3-pgsql-start-db ${PARAMOPT} || exit 1
 
 	# Give the database a few seconds to get started.
-	sleep 4
+	# sleep 4
 fi
 
 if [ ! "x${PARAMETERS}" = "x" ]; then

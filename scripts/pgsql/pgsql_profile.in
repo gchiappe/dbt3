@@ -4,18 +4,30 @@
 # This file is released under the terms of the Artistic License.
 # Please see the file LICENSE, included in this package, for details.
 #
+# Copyright (C) 2022 KetteQ, Inc.
 # Copyright (C) 2002 Jenny Zhang & Open Source Development Lab, Inc.
 #
 
 export DBT3_DIR=${HOME}/local/dbt3
 export PGHOME=@PGSQL_PATH@
 
+# Set SID to the database to use, It will be created if does not exists.
 export SID=dbt3
+# Set the Hostname
+export HOSTNAME=127.0.0.1
+# Set the Port
+export DBPORT=5432
+# Set the user that will be used to connect 
+export PGUSER=postgres
+# To set the password, you can set it here if you want, but is recommended that
+# you set in the .pgpass file and then chmod it to 0600. Se the following docs:
+# -- https://www.postgresql.org/docs/current/libpq-envars.html
+# for complete details about libpq env vars.
+# PGPASSWORD=
+# PGPASSFILE=
+
 export DBNAME=${SID}
 export PGDATA=${DBT3_DIR}/pgdata
-export HOSTNAME=${PGDATA}
-export DBPORT=7483
-
 export DEFAULT_LOAD_PARAMETERS=""
 export DEFAULT_POWER_PARAMETERS=""
 export DEFAULT_THROUGHPUT_PARAMETERS=""

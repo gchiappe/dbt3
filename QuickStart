@@ -1,15 +1,19 @@
 
-OSDL DBT-3 QuickStart
+OSDL DBT-3 QuickStart for TCP Postgres
 =====================
+
+Modified to run with remote Postgres servers, it will not fully comply with the TPC-H
+specification because it has disabled parts that require control over the database instance (start/stop). The refresh and database instance running checks are disabled.
+
+Benchmark results will provide enough information to take decisions about implementations of cloud/remote postgres running servers.
 
 Requirements
 ------------
 
- - PostgreSQL or MySQL
+ - PostgreSQL
  - sysstat
  - gnuplot 4.0
-
-
+ 
 How to install
 --------------
 
@@ -19,15 +23,10 @@ How to install
 
  (2) Run configure with several options as you need.
 
-     To configure with MySQL database, you can specify several MySQL
-     options:
-
-       $ ./configure --with-mysql --with-mysql-datadir=/tmp/mydata
-
-     To configure with PostgreSQL database, you can also specify
+     To configure set the path to postgres location, you can also specify
      PostgreSQL options:
 
-       $ ./configure --with-postgresql=/usr/pgsql-9.0
+       $ ./configure --with-postgresql=/lib/postgresql/14
 
      For more details about configure options, run with --help option:
 
@@ -49,14 +48,11 @@ How to run
 
      Other variables need not to be modified by hand.
 
- (2) Make sure that `pgsql_profile' (or `mysql_profile') have been
+ (2) Make sure that `pgsql_profile' have been
      configured correctly, and modify it if needed.
 
-     If you're using PostgreSQL, you have to specify PGHOME and PGDATA
+     You have to specify PGHOME and PGDATA
      correctly in `pgsql_profile' in the `scripts/pgsql' directory.
-
-     If you're using MySQL, you have to specify MYDATA correctly in
-     `mysql_profile' in the `scripts/mysql' directory.
 
      Other options need not to be modified by hand.
 
@@ -67,13 +63,15 @@ How to run
      would generate flat files into `DSS_PATH' directory.
 
        $ cd scripts
-       $ ./gen_data.sh 10
-         (generate dataset with scale factor 10)
+       $ ./gen_data.sh 1
+         (generate dataset with scale factor 1)
+
+     For creating bigger data, set the scale factor N+1, this is multiply the size of the generation, each factor is like 1.1 GB of data. You must have enough free disk space for this.
 
      After gen_data.sh script, make sure the data files have been generated
      correctly.
 
-       $ ls -l /tmp/dbt3.10
+       $ ls -l ~/local/data
        total 10895544
        -rw-rw-r-- 1 snaga snaga  243386690 Apr 16 00:57 customer.tbl
        -rw-rw-r-- 1 snaga snaga 7715685934 Apr 16 01:01 lineitem.tbl
@@ -87,10 +85,40 @@ How to run
 
  (4) Run `dbt3-run-workload' to run test workloads.
 
-     Now, you have been prepared to load data into the database and run
-     workloads. Run `dbt3-run-workload' in the `scripts' directory.
+     To see what options can be used with the workload script use the `-h` option.
 
-       $ ./dbt3-run-workload
+       $ ./dbt3-run-workload -h
+
+     Options are:
+
+     usage: run_workload.sh [-123eghou] [-c comment] [-d data dir]
+        [-f scale factor] [-l database port] [-n streams]
+        [-p load test database parameters]
+        [-q power test database parameters]
+        [-r throughput test database parameters]
+        [-s seed]
+
+      1 - run load test
+      2 - run power test
+      3 - run throughput test
+      c - comment about the test
+      d - database directory
+      e - EXPLAIN ANALYZE (PostgreSQL only)
+      g - generate flat files
+      h - this help message
+      l - database port
+      n - number of throughput streams
+      o - enable oprofile
+      p - database parameters for the load test
+      q - database parameters for the power test
+      r - database parameters for the throughput test
+      s - seed
+      u - use tablespaces
+
+     Now, you have been prepared to load data into the database and run
+     workloads. Run `dbt3-run-workload' in the `scripts' directory with the '-z' parameter to disable the power tests and add other options you require.
+
+       $ ./dbt3-run-workload -z
 
      You can determine the progress by refering 'time_statistics' table
      in the test database while running those workloads.
