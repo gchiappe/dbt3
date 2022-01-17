@@ -11,6 +11,7 @@ scripts/pgsql/run_rf2.sh
 scripts/pgsql/run_throughput_stream.sh
 scripts/pgsql/throughput_stream_wrapper.sh
 scripts/dbt3_profile
+scripts/run_number
 
 src/Makefile
 src/*.o
