@@ -24,8 +24,8 @@ export PGUSER=postgres
 # See the following docs:
 # -- https://www.postgresql.org/docs/current/libpq-envars.html
 # for complete details about libpq env vars.
-# PGPASSWORD=
-# PGPASSFILE=
+# export PGPASSWORD=
+# export PGPASSFILE=
 
 export DBNAME=${SID}
 export PGDATA=${DBT3_DIR}/pgdata
