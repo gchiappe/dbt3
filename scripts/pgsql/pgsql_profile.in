@@ -19,8 +19,9 @@ export HOSTNAME=127.0.0.1
 export DBPORT=5432
 # Set the user that will be used to connect 
 export PGUSER=postgres
-# To set the password, you can set it here if you want, but is recommended that
-# you set in the .pgpass file and then chmod it to 0600. Se the following docs:
+# Is recommended that password is set in the .pgpass file rather than here,
+# .pgpass must be chmoded to 0600. 
+# See the following docs:
 # -- https://www.postgresql.org/docs/current/libpq-envars.html
 # for complete details about libpq env vars.
 # PGPASSWORD=
