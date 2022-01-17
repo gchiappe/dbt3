@@ -66,7 +66,7 @@ How to run
        $ ./gen_data.sh 1
          (generate dataset with scale factor 1)
 
-     For creating bigger data, set the scale factor N+1, this is multiply the size of the generation, each factor is like 1.1 GB of data. You must have enough free disk space for this.
+     For creating bigger data, set the scale factor N+1, this will multiply the size of the generation, each factor is like 1.1 GB of data. You must have enough free disk space for this.
 
      After gen_data.sh script, make sure the data files have been generated
      correctly.
@@ -116,15 +116,14 @@ How to run
       u - use tablespaces
 
      Now, you have been prepared to load data into the database and run
-     workloads. Run `dbt3-run-workload' in the `scripts' directory with the '-z' parameter to disable the power tests and add other options you require.
+     workloads. Run `dbt3-run-workload' in the `scripts' directory.
 
-       $ ./dbt3-run-workload -z
+       $ ./dbt3-run-workload
 
      You can determine the progress by refering 'time_statistics' table
      in the test database while running those workloads.
 
        $ psql -c 'select * from time_statistics' dbt3
-        (with PostgreSQL)
 
  (5) Make sure that the result has been published in the `output'
      directory.

@@ -1,5 +1,8 @@
 # Howto for Ubuntu 14.10 with PostgreSQL 9.4
 
+Consider this information as deprecated, is recommended to run against PostgreSQL 14
+or better.
+
 # Prerequisites
 
 1) Install PostgreSQL 9.4: sudo apt-get install postgresql-9.4
