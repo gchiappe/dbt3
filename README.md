@@ -1,8 +1,8 @@
 # DBT-3, Modified to Run over TCP
 
-DBT-3 is a decision support benchmark driver for relational database systems. Data and workload are based on the TPC-H benchmark specification (http://www.tpc.org/tpch/), although the DBT-3 benchmark does not adhere to all TPC-H rules (e.g., creation of additional secondary index structures). This version of the DBT-3 benchmark is based on the original dbt3 repository that was last updated in 2012 (http://sourceforge.net/p/osdldbt/dbt3/ci/master/tree/). Changes were made such that DBT-3 is now able to run on newer versions of Ubuntu (14.04+), with newer versions of PostgreSQL (9.3+), and with the HyPer main-memory database sytem (http://www.hyper-db.com/). Additionally, refresh streams have been fixed (the previously used SQL syntax was wrong and error messages were discarded) and other minor glitches in the original implementation have been resolved. The repository still contains scripts for MySQL, but these scripts have not been updated yet.
+DBT-3 is a decision support benchmark driver for relational database systems. Data and workload are based on the TPC-H benchmark specification (http://www.tpc.org/tpch/), although the DBT-3 benchmark does not adhere to all TPC-H rules (e.g., creation of additional secondary index structures). This version of the DBT-3 benchmark is based on the original dbt3 repository that was last updated in 2012 (http://sourceforge.net/p/osdldbt/dbt3/ci/master/tree/). Changes were made such that DBT-3 is now able to run on newer versions of Ubuntu (14.04+), with newer versions of PostgreSQL (9.3+).
 
-## Howto (on Ubuntu with PostgreSQL and HyPer)
+## Howto (on Ubuntu)
 
 ### Prerequisites
 * Install PostgreSQL (9.3+)
